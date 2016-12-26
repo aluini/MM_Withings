@@ -236,6 +236,10 @@ Module.register('MM_Withings', {
     }
   },
   getDom: function () {
+    var loader = '<svg class="loadTimer" viewbox="0 0 250 250"><path class="border" transform="translate(125, 125)"/><path class="loader" transform="translate(125, 125) scale(.84)"/></svg>'
+    if(this.hideLoadTimer)
+      loader = ''
+
     return $(
       '<div class="MM_Withings__container">' +
         '<div class="small' + (this.weight == 0 ? ' hide' : '') + '">' +
@@ -267,7 +271,7 @@ Module.register('MM_Withings', {
             this.deepsleep +
         '</div>' +
         '<div>' +
-          '<svg class="loadTimer" viewbox="0 0 250 250"><path class="border" transform="translate(125, 125)"/><path class="loader" transform="translate(125, 125) scale(.84)"/></svg>' +
+          loader +
         '</div>' +
       '</div>')[0]
   }
