@@ -224,22 +224,48 @@ Module.register('MM_Withings', {
       'moment.js'
     ]
   },
-  /* getStyles: function() {
+  getStyles: function () {
     return [
-      'netatmo.css'
-    ];
+      'MM_Withings.css'
+    ]
   },
-  getTranslations: function() {
+  getTranslations: function () {
     return {
-      en: 'l10n/en.json',
-      de: 'l10n/de.json',
-      fr: 'l10n/fr.json'
-    };
-  }, */
+      en: 'l18n/en.json',
+      fr: 'l18n/fr.json'
+    }
+  },
   getDom: function () {
-    return $('<div class="MM_Withings__container" >' + '<table style="border-color: #FFFFFF; border-width: 1px; border-style: solid; border-radius: 10px;border="1"> <tr><td class="small">' + this.weight + 'kg</td><td class="small">' + this.fat + '% <td> </tr>' +
-    '<tr><td class="small">' + this.steps + 'steps</td><td class="small">' + this.distance + 'km <td></tr>' +
-    '<tr><td class="small">l.sleep:' + this.lightsleep + '</td><td class="small">d.sleep:' + this.deepsleep + '<td></tr>' +
-    '</table></div>')[0]
+    return $(
+      '<div>' +
+        '<div class="small' + (this.weight == 0 ? ' hide' : '') + '">' +
+          '<span>' + this.translate(('WEIGHT')) + ' : </span> ' +
+            this.weight +
+          ' kg' +
+        '</div>' +
+        '<div class="small' + (this.fat == 0 ? ' hide' : '') + '">' +
+          '<span>' + this.translate(('FAT')) + ' : </span> ' +
+            this.fat +
+          '%' +
+        '</div>' +
+        '<div class="small' + (this.steps == 0 ? ' hide' : '') + '">' +
+          '<span>' + this.translate(('STEPS')) + ' : </span> ' +
+            this.steps +
+          ' ' + this.translate(('UNIT_STEPS')) +
+        '</div>' +
+        '<div class="small' + (this.distance == 0 ? ' hide' : '') + '">' +
+          '<span>' + this.translate(('DISTANCE')) + ' : </span> ' +
+            this.distance +
+          ' km' +
+        '</div>' +
+        '<div class="small' + (this.deepsleep == '0:0h' ? ' hide' : '') + '">' +
+          '<span>' + this.translate(('LIGHT SLEEP')) + ' : </span> ' +
+            this.lightsleep +
+        '</div>' +
+        '<div class="small' + (this.deepsleep == '0:0h' ? ' hide' : '') + '">' +
+          '<span>' + this.translate(('DEEP SLEEP')) + ' : </span> ' +
+            this.deepsleep +
+        '</div>' +
+      '</div>')[0]
   }
 })
