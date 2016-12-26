@@ -2,6 +2,10 @@
   opacity: 0;
 }
 
+.MM_Withings .MM_Withings__container{
+  position: relative;
+}
+
 .MM_Withings .hide{
   display: none;
 }
@@ -11,6 +15,10 @@ svg.loadTimer {
 	height: .5em;
 	margin: .2em 0;
 	vertical-align: middle;
+
+  position: absolute;
+  right: 0px;
+  top: -38px;
 }
 svg.loadTimer .loader{ fill: black;}
 svg.loadTimer .border{ fill: gray;}
