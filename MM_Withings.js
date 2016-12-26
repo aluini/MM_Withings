@@ -156,33 +156,33 @@ Module.register('MM_Withings', {
     }
   },
   extractweight: function (data) {
-    var var2 = data
     var obj = JSON.parse(data)
     Log.info('status=' + obj.status)
     Log.info('time=' + obj.body.measuregrps[0].date)
-    this.weight = obj.body.measuregrps[0].measures[0].value * Math.pow(10, obj.body.measuregrps[0].measures[0].unit)
-    this.dateweight = obj.body.measuregrps[0].date
-
-    Log.info('poids=' + this.weight + '; date=' + this.dateweight)
+    if (obj.body.measuregrps != null) {
+      this.weight = (obj.body.measuregrps[0].measures[0].value * Math.pow(10, obj.body.measuregrps[0].measures[0].unit)).toFixed(3)
+      this.dateweight = obj.body.measuregrps[0].date
+      Log.info('weight=' + this.weight + '; date=' + this.dateweight)
+    }
   },
 
   extractfat: function (data) {
-    var var2 = data
     var obj = JSON.parse(data)
-    Log.info('status=' + obj.status)
-    Log.info('time=' + obj.body.measuregrps[0].date)
-    this.fat = Number(obj.body.measuregrps[0].measures[0].value * Math.pow(10, obj.body.measuregrps[0].measures[0].unit)).toFixed(2)
-    // this.dateweight=obj.body.measuregrps[0].date;
-
-    Log.info('poids=' + this.weight + '; date=' + this.dateweight)
+    if (obj.measuregrps != null) {
+      Log.info('status=' + obj.status)
+      Log.info('time=' + obj.body.measuregrps[0].date)
+      this.fat = Number(obj.body.measuregrps[0].measures[0].value * Math.pow(10, obj.body.measuregrps[0].measures[0].unit)).toFixed(2)
+      this.fatweight = obj.body.measuregrps[0].date
+      Log.info('fat=' + this.fat + '; date=' + this.fatweight)
+    }
   },
 
   extractactivity: function (data) {
     if (typeof data.body.steps != 'undefined') {
       this.steps = data.body.steps
       this.distance = Number(data.body.distance * Math.pow(10, -3)).toFixed(2)
+      Log.info('pas=' + this.steps + '; distance=' + this.distance)
     }
-    Log.info('pas=' + this.steps + '; distance=' + this.distance)
   },
 
   extractsleep: function (data) {
