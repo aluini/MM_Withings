@@ -3,6 +3,7 @@
  *
  * By Jonathan Loriette http://github.com/john7002
  * based on Netatmo module by Christopher Fenner http://github.com/CFenner
+ * contrib by Alexandre LUINI http://github.com/aluini
  * MIT Licensed.
  */
 Module.register('MM_Withings', {
@@ -79,7 +80,22 @@ Module.register('MM_Withings', {
     this.α++
     this.α %= 360
     var r = (this.α * Math.PI / 180)
+    var x = Math.sin(r) * 125
+    var y = Math.cos(r) * -125
+    var mid = (this.α > 180) ? 1 : 0
+    var anim = 'M 0 0 v -125 A 125 125 1 ' +
+       mid + ' 1 ' +
+       x + ' ' +
+       y + ' z'
 
+    var loader = $('.MM_Withings__container .loadTimer .loader')
+    if (loader.length > 0) {
+      loader.attr('d', anim)
+    }
+    var border = $('.MM_Withings__container .loadTimer .border')
+    if (border.length > 0) {
+      border.attr('d', anim)
+    }
     if (r === 0) {
       // refresh data
       this.updateLoad()
@@ -221,7 +237,7 @@ Module.register('MM_Withings', {
     };
   }, */
   getDom: function () {
-    return $('<div >' + '<table style="border-color: #FFFFFF; border-width: 1px; border-style: solid; border-radius: 10px;border="1"> <tr><td class="small">' + this.weight + 'kg</td><td class="small">' + this.fat + '% <td> </tr>' +
+    return $('<div class="MM_Withings__container" >' + '<table style="border-color: #FFFFFF; border-width: 1px; border-style: solid; border-radius: 10px;border="1"> <tr><td class="small">' + this.weight + 'kg</td><td class="small">' + this.fat + '% <td> </tr>' +
     '<tr><td class="small">' + this.steps + 'steps</td><td class="small">' + this.distance + 'km <td></tr>' +
     '<tr><td class="small">l.sleep:' + this.lightsleep + '</td><td class="small">d.sleep:' + this.deepsleep + '<td></tr>' +
     '</table></div>')[0]
