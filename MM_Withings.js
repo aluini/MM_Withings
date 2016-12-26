@@ -10,7 +10,7 @@ Module.register('MM_Withings', {
   // default config
   defaults: {
     refreshToken: null,
-    updateInterval: 2, // every 15 minutes,
+    updateInterval: 10, // every 10 minutes,
     animationSpeed: 1000,
     hideLoadTimer: false,
     api: {
