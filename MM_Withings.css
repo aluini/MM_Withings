@@ -5,3 +5,12 @@
 .MM_Withings .hide{
   display: none;
 }
+
+svg.loadTimer {
+	width: .5em;
+	height: .5em;
+	margin: .2em 0;
+	vertical-align: middle;
+}
+svg.loadTimer .loader{ fill: black;}
+svg.loadTimer .border{ fill: gray;}
